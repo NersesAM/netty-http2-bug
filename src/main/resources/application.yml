@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: bugzilla
+
+server:
+  max-http-request-header-size: 16KB
+  http2:
+    enabled: true
+  ssl:
+    enabled: false
