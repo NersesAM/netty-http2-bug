@@ -9,14 +9,13 @@ import org.springframework.util.unit.DataSize
 import reactor.netty.http.server.HttpServer
 
 //@Component
-class NettyWebServerFactoryPortCustomizer(
+class NettyCustomizer(
   @Value("\${server.max-http-request-header-size}") val maxSize: DataSize
 ) : WebServerFactoryCustomizer<NettyReactiveWebServerFactory> {
     override fun customize(serverFactory: NettyReactiveWebServerFactory) {
         serverFactory.addServerCustomizers(Http2Customizer(maxSize.toBytes()))
     }
 }
-
 
 private class Http2Customizer(val maxSize: Long) : NettyServerCustomizer {
     override fun apply(httpServer: HttpServer): HttpServer {
